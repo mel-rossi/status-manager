@@ -15,15 +15,12 @@ const itemList = document.getElementById("item-list");
 
 /* ======================================= */
 // --- Task 3: Selecting and Changing Inner HTML ---
-// Write the code here to select the mainTitle and update its innerHTML:
 
 // Change text dynamically when page loads
 mainTitle.innerHTML = "DOM Project: Ready!"; 
 
 /* ======================================= */
 // --- Task 4: Attribute Modification ---
-// Write the code here to use setAttribute() on the toggleButton element
-// to add the required 'data-action' attribute.
 
 // Add custom attributes to existing elements
 toggleButton.setAttribute("data-action", "status-toggle");
@@ -36,10 +33,31 @@ toggleButton.setAttribute("data-action", "status-toggle");
 
 /* ======================================= */
 // --- Tasks 5, 6, 7 & 8: Toggle Functionality ---
-// Define the functions (e.g., toggleStatus, createTimestamp) and event listeners
-// here to handle the click event on the toggleButton [6, 7].
 
-// Toggle Function 
+// Helper Function - Timesteamp creation 
+// function createTimestamp()
+
+// Toggle Function (Task 5)
+function toggleStatus(e) { 
+    // Prevent anchor tag from refreshing page (Task 6)
+    e.preventDefault(); 
+
+    // Toggle .hidden class on status output div (Task 5)
+    statusOutput.classList.contains("hidden");
+
+    // Check visibility and set or reset background color of main title (Task 7)
+    if (!statusOutput.classList.contains("hidden")) { // Status visible 
+        mainTitle.style.backgroundColor = "yellow"; 
+
+        // Call createTimestamp 
+        
+    } else { // Status hidden 
+        mainTitle.style.backgroundColor = "";
+    }
+}
+
+// Bind toggleStatus to toggle button's click event (Task 5)
+toggleButton.addEventListener("click", toggleStatus);
 
 /* ======================================= */
 // --- Task 10: Timed Animation ---
