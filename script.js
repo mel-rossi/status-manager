@@ -27,15 +27,29 @@ toggleButton.setAttribute("data-action", "status-toggle");
 
 /* ======================================= */
 // --- Task 9: Looping and Applying Changes ---
-// Define and call the highlightListItems() function here so it runs on load.
-// You will need to use document.querySelectorAll('li') and a loop structure
-// (like a 'for' loop or 'forEach') to iterate over all list items [3-5].
+
+// Highlight Items Functionn (Task 9)
+function highlightListItems() {
+    const listItems = document.querySelectorAll("li");
+
+    listItems.forEach(item => {
+        item.style.color = "blue"; 
+    });
+}
+
+// Run once page loads
+highlightListItems();
 
 /* ======================================= */
 // --- Tasks 5, 6, 7 & 8: Toggle Functionality ---
 
-// Helper Function - Timesteamp creation 
-// function createTimestamp()
+// Helper Function - Timesteamp creation (Task 8)
+function createTimestamp() { 
+    const span = document.createElement("span");
+
+    span.innerHTML = new Date().toLocaleTimeString(); 
+    statusOutput.appendChild(span);
+}
 
 // Toggle Function (Task 5)
 function toggleStatus(e) { 
@@ -49,8 +63,9 @@ function toggleStatus(e) {
     if (!statusOutput.classList.contains("hidden")) { // Status visible 
         mainTitle.style.backgroundColor = "yellow"; 
 
-        // Call createTimestamp 
-        
+        // Append timestamp when status is visible (Task 8)
+        createTimestamp();
+
     } else { // Status hidden 
         mainTitle.style.backgroundColor = "";
     }
@@ -61,6 +76,23 @@ toggleButton.addEventListener("click", toggleStatus);
 
 /* ======================================= */
 // --- Task 10: Timed Animation ---
-// Define the startFlashing() and stopFlashing() functions using
-// setInterval() and clearInterval() [8, 9], and bind them to the
-// timerButton using addEventListener for 'click' and 'dblclick' [10].
+
+// Start Flashing Function
+function startFlashing() { // Toggle .hidden on control-panel every 500ms
+    intervalId = setInterval(() => {
+        controlPanel.classList.toggle("hidden");
+    }, 500);
+} 
+
+// Stop Flashing Function 
+function stopFlashing() { // Clear interval and ensures control-panel is visible
+    clearInterval(intervalId);
+    intervalId = null;
+    controlPanel.classList.remove("hidden");
+}
+
+// Bind startFlashing to timer button's click event 
+timerButton.addEventListener("click", startFlashing);
+
+// Bind stopFlashing to timer button's double click event 
+timerButton.addEventListener("dblclick", stopFlashing);
