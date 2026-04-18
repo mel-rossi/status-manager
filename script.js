@@ -49,6 +49,8 @@ function createTimestamp() {
 
     span.innerHTML = new Date().toLocaleTimeString(); 
     statusOutput.appendChild(span);
+
+    statusOutput.appendChild(document.createElement("br")); // Add line break between each timestamp
 }
 
 // Toggle Function (Task 5)
@@ -57,7 +59,7 @@ function toggleStatus(e) {
     e.preventDefault(); 
 
     // Toggle .hidden class on status output div (Task 5)
-    statusOutput.classList.contains("hidden");
+    statusOutput.classList.toggle("hidden");
 
     // Check visibility and set or reset background color of main title (Task 7)
     if (!statusOutput.classList.contains("hidden")) { // Status visible 
@@ -79,6 +81,8 @@ toggleButton.addEventListener("click", toggleStatus);
 
 // Start Flashing Function
 function startFlashing() { // Toggle .hidden on control-panel every 500ms
+    if (intervalId !== null) return; // Guard (against stacking intervals - exactly .5 sec flash)
+
     intervalId = setInterval(() => {
         controlPanel.classList.toggle("hidden");
     }, 500);
